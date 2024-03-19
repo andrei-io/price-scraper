@@ -1,5 +1,6 @@
 package org.andreiio.product;
 
+import org.andreiio.scraping.ScrapingService;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
@@ -25,6 +26,7 @@ public class Source {
             String rawHtml = this.scrapingService.getHtml(this.link);
             Document doc = Jsoup.parse(rawHtml);
 
+            // TODO: handle null check / price missing
             var raw = doc.selectFirst(this.selector).text().trim();
             Pattern pattern=Pattern.compile("[-]?[0-9]*\\.?[0-9]+");
             Matcher matcher=pattern.matcher(raw);
